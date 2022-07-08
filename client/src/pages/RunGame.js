@@ -9,6 +9,8 @@ import RowForGuessing from '../components/RowForGuessing'
 import Nav from '../components/Nav';
 import { useNavigate, Link } from "react-router-dom";
 import { QUERY_WORD } from "../utils/queries";
+import { Word } from "../../../server/models";
+import { useMutation, useQuery } from '@apollo/client'
 
 
 export function RunGame(props) {
@@ -37,24 +39,40 @@ export function RunGame(props) {
 
     const [submittedRowArray, setSubmittedRowArray] = useState([]);
 
-    const keyboardButtonPressed = (buttonValue) => {
+    const [score, setScore] = useState(1);
 
-        console.log(buttonValue);
+    const [highscore, setHighscore] = useState(1)
+
+    const [highscoreName, setHighscoreName] = useState('Error')
+
+    const checkScore = (word) => {
+        const { data } = useQuery(QUERY_WORD_SCORE, {
+            variables: {
+                word: word._id
+            }
+        })
+
+        currentHigh = data?.word
+
+        console.log(currentHigh)
+    }
+
+    const keyboardButtonPressed = (buttonValue) => {
 
         if (buttonValue === 'Delete') {
 
             setTypedLetterArray(typedLetterArray.slice(0, -1));
 
         } else if (buttonValue === 'Enter' && typedLetterArray.length === word.characters.length) {
-            console.log(typedLetterArray.join(''));
             if (typedLetterArray.join('') === word.characters.toUpperCase()) {
                 setGameWin(true);
-                //TODO: update highscore and highscore name for the word
+                checkScore(word)
                 setSubmittedRowArray(submittedRowArray.concat(typedLetterArray.join('')));
                 return;
             }
             setSubmittedRowArray(submittedRowArray.concat(typedLetterArray.join('')));
             setTypedLetterArray([]);
+            setScore(score + 1);
 
         } else if (buttonValue === 'Enter') {
             return;
@@ -64,7 +82,6 @@ export function RunGame(props) {
             setTypedLetterArray(typedLetterArray.concat(buttonValue.toUpperCase()))
         }
 
-        console.log(typedLetterArray);
     }
 
 
@@ -101,7 +118,7 @@ export function RunGame(props) {
             ) : (
                 <div>
 
-                    {/* <Highscore word={word} /> */}
+                    <Highscore word={highscore} />
 
                     <Comments word={word} ref={commentsRef} />
 

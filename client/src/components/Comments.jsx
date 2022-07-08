@@ -30,8 +30,6 @@ const Comments = React.forwardRef(({ word }, ref) => {
 
     }
 
-    console.log(data2);
-
     let wordComments = data2?.comments;
 
     const [awarded, setAwarded] = useState(false);

@@ -37,6 +37,9 @@ const resolvers = {
 
             return Word.findOne().skip(num);
         },
+        wordScore: async (parent, { word }) => {
+            return Word.findById(word)
+        }
     },
 
     Mutation: {

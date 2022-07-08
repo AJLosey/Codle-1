@@ -71,8 +71,6 @@ export function Login() {
                 }
             })
 
-            console.log(data);
-
             localStorage.setItem("CodleUsername", JSON.stringify(usernameReg));
             localStorage.setItem("CodlePassword", JSON.stringify(passwordReg));
             localStorage.setItem("Codleid", JSON.stringify(data.addAccount.account._id));

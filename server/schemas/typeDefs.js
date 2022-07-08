@@ -34,6 +34,7 @@ const typeDefs = gql`
         comments(word: String): [Comment]!
         QueryLogin(username: String, password: String): AuthData
         word: Word
+        wordScore: Word
     }
 
     type Mutation {
