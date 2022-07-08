@@ -37,9 +37,6 @@ const resolvers = {
 
             return Word.findOne().skip(num);
         },
-        wordScore: async (parent, { word }) => {
-            return Word.findById(word)
-        }
     },
 
     Mutation: {
@@ -84,6 +81,15 @@ const resolvers = {
                     runValidators: true,
                 }
             );
+        },
+        UpdateScore: async (parent, { word, username, score }) => {
+            await Word.findByIdAndUpdate(
+                word,
+                {
+                    highScoreName: username,
+                    highScore: score
+                }
+            )
         },
         removeComment: async (parent, { word, comment }, context) => {
 

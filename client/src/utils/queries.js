@@ -22,15 +22,6 @@ export const QUERY_COMMENTS = gql`
     }
 `;
 
-export const QUERY_WORD_SCORE = gql`
-    query wordScore ($word: String!){
-        word (word: $word) {
-            highScore
-            highScoreName
-        }
-    }
-`;
-
 export const QUERY_WORDS = gql`
     query words {
         word {

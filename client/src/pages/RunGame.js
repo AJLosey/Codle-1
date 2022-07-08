@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
 import Keyboard from '../components/Keyboard'
 import Highscore from '../components/Highscore'
@@ -9,8 +9,7 @@ import RowForGuessing from '../components/RowForGuessing'
 import Nav from '../components/Nav';
 import { useNavigate, Link } from "react-router-dom";
 import { QUERY_WORD } from "../utils/queries";
-import { Word } from "../../../server/models";
-import { useMutation, useQuery } from '@apollo/client'
+import { UPDATE_SCORE } from "../utils/mutations";
 
 
 export function RunGame(props) {
@@ -41,20 +40,44 @@ export function RunGame(props) {
 
     const [score, setScore] = useState(1);
 
-    const [highscore, setHighscore] = useState(1)
+    const [highScore, setHighScore] = useState({ scorenum: 1, scorename: '' });
 
-    const [highscoreName, setHighscoreName] = useState('Error')
+    const [updateScore, { error, data: data2 }] = useMutation(UPDATE_SCORE)
 
-    const checkScore = (word) => {
-        const { data } = useQuery(QUERY_WORD_SCORE, {
-            variables: {
-                word: word._id
+    const checkScore = async (word) => {
+        let wordHighScore = word.highScore;
+        let wordHighScoreName = word.highScoreName
+
+        if (!word.highScore || word.highScore >= score) {
+            try {
+                await updateScore({
+                    variables: {
+                        word: word._id,
+                        score: score,
+                        username: JSON.parse(localStorage.getItem('CodleUsername'))
+                    }
+                })
+            } catch (e) {
+                console.error(e);
+                return;
+            } finally {
+                wordHighScore = score;
+                wordHighScoreName = JSON.parse(localStorage.getItem('CodleUsername'))
+                setHighScore({ scorenum: wordHighScore, scorename: wordHighScoreName })
+
+                console.log("Word has been updated, highscore: " + highScore.scorename + wordHighScoreName);
+                setGameWin(true);
+
             }
-        })
+        } else {
+            setHighScore({ scorenum: wordHighScore, scorename: wordHighScoreName })
 
-        currentHigh = data?.word
+            console.log("Word has been updated, highscore: " + highScore.scorename + wordHighScoreName);
+            setGameWin(true);
+        }
 
-        console.log(currentHigh)
+
+
     }
 
     const keyboardButtonPressed = (buttonValue) => {
@@ -65,7 +88,6 @@ export function RunGame(props) {
 
         } else if (buttonValue === 'Enter' && typedLetterArray.length === word.characters.length) {
             if (typedLetterArray.join('') === word.characters.toUpperCase()) {
-                setGameWin(true);
                 checkScore(word)
                 setSubmittedRowArray(submittedRowArray.concat(typedLetterArray.join('')));
                 return;
@@ -118,7 +140,7 @@ export function RunGame(props) {
             ) : (
                 <div>
 
-                    <Highscore word={highscore} />
+                    <Highscore highScore={highScore.scorenum} name={highScore.scorename} />
 
                     <Comments word={word} ref={commentsRef} />
 

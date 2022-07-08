@@ -21,6 +21,15 @@ mutation AddAccount ($username: String!, $password: String!) {
 }
 `;
 
+export const UPDATE_SCORE = gql`
+mutation UpdateScore ($username: String!, $score: Int!, $word: String!) {
+    UpdateScore (username: $username, score: $score, word: $word) {
+            highScore
+            highScoreName
+    }
+}
+`
+
 export const ADD_COMMENT = gql`
     mutation addComment($word: String!, $content: String!, $account: String!) {
         addComment(word: $word, content: $content, account: $account) {

@@ -34,10 +34,10 @@ const typeDefs = gql`
         comments(word: String): [Comment]!
         QueryLogin(username: String, password: String): AuthData
         word: Word
-        wordScore: Word
     }
 
     type Mutation {
+        UpdateScore(word: String, username: String, score: Int): Word
         addWord(newWord: String): Word
         addAccount(username: String, password: String): AuthData
         addComment(word: String, content: String, account: String): Comment
