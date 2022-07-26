@@ -124,48 +124,55 @@ export function Login() {
     return (
         <div className="bg-gradient-to-tl from-black to-gray-500 h-screen w-screen text-white">
             <div className="createAccount ">
-                <h1 className="h-[50px] w-screen text-transparent bg-clip-text bg-gradient-to-br from-[#ff8300] to-[#00d8ff] border-b-4 border-b-indigo-500 flex justify-center items-center text-4xl font-extrabold">Create Account</h1>
+                <h1 className="h-[50px] w-screen text-transparent bg-clip-text bg-gradient-to-br from-[#ff8300] to-[#00d8ff] border-b-4 border-b-indigo-500 flex justify-center items-center text-4xl font-extrabold">Create Account or Login</h1>
 
-                <div className='m-4'>
-                    <div className='mb-4'>
-                        <label className='m-8'>Username</label>
-                        <input
-                            className='text-black'
-                            type="text"
-                            onChange={handleCreateUserChange}
-                            value={usernameReg}
-                        />
+                <div className="mx-20">
+
+
+                    <div className='m-4'>
+                        <div className='mb-4'>
+                            <input
+                                placeholder="Username..."
+                                className='my-4 text-black'
+                                type="text"
+                                onChange={handleCreateUserChange}
+                                value={usernameReg}
+                            />
+                        </div>
+                        <div>
+                            <input type="text"
+                                placeholder="Password..."
+                                className='text-black'
+                                value={passwordReg} onChange={handleCreatePassChange}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label className='m-8'>Password</label>
-                        <input type="text"
-                            className='text-black'
-                            value={passwordReg} onChange={handleCreatePassChange}
-                        />
+
+                    <button className='mb-4 rounded bg-gray-600 font-bold text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1' onClick={Create}>Create!</button>
+
+
+
+                    <div className="login">
+                        <div>
+                            <input
+                                ref={userNameInputRef}
+                                className='m-4 text-black' type="text" placeholder="Username..."
+                            // value={usernameLogin}
+                            // onChange={handleLogUserChange}
+                            />
+                        </div>
+                        <div>
+                            <input className='m-4 text-black' type="password" placeholder="Password..."
+                                ref={passwordInputRef}
+                            // value={passwordLogin}
+                            // onChange={handleLogPassChange}
+                            />
+                        </div>
+                        <button className='mb-4 rounded bg-gray-600 font-bold text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1' onClick={login}>Login!</button>
                     </div>
+
                 </div>
 
-                <button className='mb-4 rounded bg-gray-600 font-bold text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1' onClick={Create}>Create!</button>
-
-            </div>
-
-            <div className="login">
-                <div>
-                    <input
-                        ref={userNameInputRef}
-                        className='m-4 text-black' type="text" placeholder="Username..."
-                    // value={usernameLogin}
-                    // onChange={handleLogUserChange}
-                    />
-                </div>
-                <div>
-                    <input className='m-4 text-black' type="password" placeholder="Password..."
-                        ref={passwordInputRef}
-                    // value={passwordLogin}
-                    // onChange={handleLogPassChange}
-                    />
-                </div>
-                <button className='mb-4 rounded bg-gray-600 font-bold text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1' onClick={login}>Login!</button>
             </div>
 
             {renderLink ? (

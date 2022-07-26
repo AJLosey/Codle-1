@@ -8,7 +8,7 @@ const Account = require('../models/Account');
 const Comment = require('../models/Comment');
 //account association, word association, content
 
-// const db = require('../config/connection');
+const db = require('../config/connection');
 const wordSeed = require('./wordSeed.json');
 
 const data = wordSeed.map((word) => {
@@ -16,14 +16,14 @@ const data = wordSeed.map((word) => {
 })
 console.log(JSON.stringify(data, null, 2));
 
-// db.once('open', async () => {
+db.once('open', async () => {
 
-//     await Word.deleteMany({});
+    await Word.deleteMany({});
 
-//     const words = await Word.insertMany(wordSeed.map((word) => {
-//         return { characters: word }
-//     }));
-//     console.log('got this far3')
-//     console.log('Words have been seeded!');
-//     process.exit(0);
-// });
+    const words = await Word.insertMany(wordSeed.map((word) => {
+        return { characters: word }
+    }));
+    console.log('got this far3')
+    console.log('Words have been seeded!');
+    process.exit(0);
+});
