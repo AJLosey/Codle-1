@@ -13,7 +13,7 @@ import Account from './pages/Account';
 import Comment from './pages/Comment';
 import { Login } from './pages/Login';
 import { RunGame } from './pages/RunGame';
-import { ViewComments } from './pages/ViewComments';
+import { Dashboard } from './pages/Dashboard';
 import Word from './pages/Word';
 
 const httpLink = createHttpLink({
@@ -51,10 +51,10 @@ function App() {
             path="/"
             element={<Login />}
           />
-          {/* <Route
-            path='/comments'
-            element={<ViewComments />}
-          /> */}
+          <Route
+            path='/dashboard'
+            element={<Dashboard />}
+          />
           {/* <Route
             path="/signup"
             element={<Account />}

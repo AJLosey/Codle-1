@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export function ViewComments() {
+export function Dashboard() {
 
     //TODO, get array of comments associated with username
+
+    //get array of highschores associated with username
 
     //test data in useState
     const [commentArray, setCommentArray] = useState([
@@ -39,4 +41,3 @@ export function ViewComments() {
     )
 
 }
-

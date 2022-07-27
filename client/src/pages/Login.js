@@ -54,7 +54,7 @@ export function Login() {
             localStorage.setItem("CodlePassword", JSON.stringify(passwordLogin));
             localStorage.setItem("Codleid", JSON.stringify(data2.QueryLogin.account._id));
             localStorage.setItem("CodleToken", JSON.stringify(data2.QueryLogin.token));
-            navigate('/play');
+            navigate('/dashboard');
         }
     }, [data2])
 
@@ -77,6 +77,7 @@ export function Login() {
             localStorage.setItem("CodleToken", JSON.stringify(data.addAccount.token));
         } catch (e) {
             console.error(e);
+            alert("invalid account, try again");
             return;
         }
 
@@ -87,7 +88,7 @@ export function Login() {
         //     //         console.log(response);
         //     //     });
 
-        navigate('/play');
+        navigate('/dashboard');
 
     };
 

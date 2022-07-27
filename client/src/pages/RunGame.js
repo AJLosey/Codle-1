@@ -14,6 +14,8 @@ import { UPDATE_SCORE } from "../utils/mutations";
 
 export function RunGame(props) {
 
+    let navigate = useNavigate();
+
     const [queryWord, { data }] = useLazyQuery(QUERY_WORD);
 
     useEffect(() => {
@@ -116,7 +118,9 @@ export function RunGame(props) {
             <Nav />
 
             {/* <Link to="/comments">View Your Comments</Link> */}
-            <button onClick={() => { window.location.reload(false) }}>New Game</button>
+            <button className='m-4' onClick={() => { window.location.reload(false) }}>New Game</button>
+
+            <button className='m-4' onClick={() => { navigate('/dashboard') }}>Account Dashboard</button>
 
             {submittedRowArray.length > 0 ? (
                 submittedRowArray.map(
