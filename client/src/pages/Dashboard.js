@@ -1,6 +1,6 @@
 import React, { useState, useImperativeHandle } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { QUERY_COMMENTS_ACCOUNT } from "../utils/queries";
+import { QUERY_COMMENTS_ACCOUNT, QUERY_HIGHSCORES } from "../utils/queries";
 import { useMutation, useQuery } from '@apollo/client'
 import { REMOVE_COMMENT } from "../utils/mutations";
 
@@ -33,17 +33,19 @@ export function Dashboard() {
 
     //get array of highschores associated with username
 
-    const { data: data3 } = useQuery(HIGHSCORES, {
+    const { data: data3 } = useQuery(QUERY_HIGHSCORES, {
         variables: {
             highScoreName: JSON.parse(localStorage.getItem('CodleUsername'))
         }
     })
 
+    let accHighScores = data3?.highscores;
+
     const [scoreArray, setScoreArray] = useState([
         { word: "test", score: 5 }
     ])
 
-    console.log(accComments);
+    console.log(accHighScores);
 
     if (!data2) {
         return null;
@@ -58,11 +60,11 @@ export function Dashboard() {
 
             <Link className='m-4' to="/play">New Game</Link>
 
-            {scoreArray.map(
+            {accHighScores.map(
                 function (highScore) {
                     return (
                         <div className='mb-4 rounded bg-gray-600 text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1 w-1/2 m-auto divide-y'>
-                            <p>You got the word "{highScore.word}" in {highScore.score} attempts!</p>
+                            <p>You got the word "{highScore.characters}" in {highScore.highScore} attempts!</p>
                         </div>
                     )
                 }

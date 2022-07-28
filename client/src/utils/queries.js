@@ -34,6 +34,16 @@ export const QUERY_COMMENTS_ACCOUNT = gql`
     }
 `;
 
+export const QUERY_HIGHSCORES = gql`
+    query highscores($highScoreName: String!) {
+        highscores (highScoreName: $highScoreName) {
+            characters
+            highScore
+        }
+    }
+
+`;
+
 export const QUERY_WORDS = gql`
     query words {
         word {

@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken')
 
 const resolvers = {
     Query: {
+        highscores: async (parent, { highScoreName }) => {
+            return Word.find({ highScoreName: highScoreName });
+        },
         words: async () => {
             return Word.find();
         },
