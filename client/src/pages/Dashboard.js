@@ -33,6 +33,12 @@ export function Dashboard() {
 
     //get array of highschores associated with username
 
+    const { data: data3 } = useQuery(HIGHSCORES, {
+        variables: {
+            highScoreName: JSON.parse(localStorage.getItem('CodleUsername'))
+        }
+    })
+
     const [scoreArray, setScoreArray] = useState([
         { word: "test", score: 5 }
     ])

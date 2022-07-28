@@ -56,7 +56,9 @@ export function Login() {
             localStorage.setItem("CodleToken", JSON.stringify(data2.QueryLogin.token));
             navigate('/dashboard');
         } else {
-            alert("Invalid username or password, try again");
+            if (usernameReg) {
+                alert("Invalid username or password, try again");
+            }
         }
     }, [data2])
 
