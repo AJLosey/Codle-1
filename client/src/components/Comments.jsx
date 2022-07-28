@@ -5,6 +5,7 @@ import { REMOVE_COMMENT } from "../utils/mutations";
 
 const Comments = React.forwardRef(({ word }, ref) => {
 
+
     const { data: data2, refetch } = useQuery(QUERY_COMMENTS, {
         variables: {
             word: word._id
@@ -32,15 +33,6 @@ const Comments = React.forwardRef(({ word }, ref) => {
 
     let wordComments = data2?.comments;
 
-    const [awarded, setAwarded] = useState(false);
-
-    const addAward = () => {
-        if (awarded) {
-            return;
-        }
-        setAwarded(true);
-        //TODO: increment comment award by 1
-    }
 
     return (
         <div >

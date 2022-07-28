@@ -22,6 +22,18 @@ export const QUERY_COMMENTS = gql`
     }
 `;
 
+export const QUERY_COMMENTS_ACCOUNT = gql`
+    query commentsAccount ($account: String!){
+        comments_account (account: $account) {
+            content
+            word {
+                characters
+            }
+            _id
+        }
+    }
+`;
+
 export const QUERY_WORDS = gql`
     query words {
         word {

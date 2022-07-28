@@ -32,6 +32,7 @@ const typeDefs = gql`
         words: [Word]!
         accounts: [Account]!
         comments(word: String): [Comment]!
+        comments_account(account: String): [Comment]!
         QueryLogin(username: String, password: String): AuthData
         word: Word
     }

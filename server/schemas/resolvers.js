@@ -14,6 +14,9 @@ const resolvers = {
         comments: async (parent, { word }) => {
             return Comment.find({ word: word }).populate('account');
         },
+        comments_account: async (parent, { account }) => {
+            return Comment.find({ account: account }).populate('word')
+        },
         QueryLogin: async (parent, { username, password }) => {
 
             const account = await Account.findOne({ username }).exec()

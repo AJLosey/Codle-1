@@ -55,6 +55,8 @@ export function Login() {
             localStorage.setItem("Codleid", JSON.stringify(data2.QueryLogin.account._id));
             localStorage.setItem("CodleToken", JSON.stringify(data2.QueryLogin.token));
             navigate('/dashboard');
+        } else {
+            alert("Invalid username or password, try again");
         }
     }, [data2])
 
@@ -77,7 +79,7 @@ export function Login() {
             localStorage.setItem("CodleToken", JSON.stringify(data.addAccount.token));
         } catch (e) {
             console.error(e);
-            alert("invalid account, try again");
+            alert("invalid account, username may already be in use, try again");
             return;
         }
 
