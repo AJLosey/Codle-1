@@ -60,7 +60,7 @@ export function Dashboard() {
 
             <Link className='m-4' to="/play">New Game</Link>
 
-            {accHighScores.map(
+            {accHighScores?.map(
                 function (highScore) {
                     return (
                         <div className='mb-4 rounded bg-gray-600 text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1 w-1/2 m-auto divide-y'>
@@ -70,7 +70,7 @@ export function Dashboard() {
                 }
             )}
 
-            {accComments.map(
+            {accComments?.map(
                 function (comment) {
                     return (<div className='mb-4 rounded bg-gray-600 text-md md:text-2xl text-slate-300 md:py-2 p-[5px] md:flex-1 w-1/2 m-auto divide-y'>
                         <p>{comment.content}</p>
